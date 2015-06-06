@@ -24,13 +24,6 @@ char* getElemnt(int index, char *key)			// O(1)
 	read.close();								// 1
 	return key;									// 1
 }
-/*void setElement(int index, char key[])
-{
-	ofstream a("binary.bin", ios::binary );
-	a.seekp((index-1)*4);
-	a.write( reinterpret_cast <const char*> (&key), sizeof( key ) );
-	a.close();
-}*/
 void charPrint(char cha[])
 {
 	cout << "|>";
