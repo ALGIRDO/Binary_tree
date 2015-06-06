@@ -11,18 +11,16 @@ string failas = "20000.bin";
 int kiekis = 20000;
 
 
-char* getElemnt(int index, char *key)			// O(1)
+char* getElemnt(int index, char *key)
 {
-	ifstream read(failas, ios::binary );		// 1
-	read.seekg((index-1)*max_pav_ilgis);		// 1
-	//cout << sizeof(key) << endl;
-	for (int i = 0; i < max_pav_ilgis; i++)		// max_pav_ilgis + 1 = 27
+	ifstream read(failas, ios::binary );
+	read.seekg((index-1)*max_pav_ilgis);
+	for (int i = 0; i < max_pav_ilgis; i++)
 	{
-		read.get(key[i]);						// 26
-		//cout << key[i] << endl;
+		read.get(key[i]);
 	}
-	read.close();								// 1
-	return key;									// 1
+	read.close();
+	return key;
 }
 void charPrint(char cha[])
 {
@@ -33,17 +31,17 @@ void charPrint(char cha[])
 	}
 	cout << "<|" << endl;
 }
-string charString(char cha[]){				// O(1)
-	string s;								// 1
-	for(int i=0; i< max_pav_ilgis; i++){	// max_pav_ilgis + 1 = 27
-		s +=cha[i];							// 26
+string charString(char cha[]){
+	string s;
+	for(int i=0; i< max_pav_ilgis; i++){
+		s +=cha[i];
 	}
-	return s;								// 1
+	return s;
 }
-string getString(int index) {   // O(1)
-	char zodis[max_pav_ilgis] = {' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '}; // 1
-	getElemnt(index, zodis);	// O(1)
-	return charString(zodis);	// O(1)
+string getString(int index) {
+	char zodis[max_pav_ilgis] = {' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '};
+	getElemnt(index, zodis);
+	return charString(zodis);
 }
 struct node
 {
@@ -88,7 +86,7 @@ class btree
 		{
 			destroy_tree(root);
 		}
-/**/	void Inorder_Tree_Walk()
+	void Inorder_Tree_Walk()
 		{
 			Inorder_Tree_Walk(root);
 		}
@@ -138,10 +136,8 @@ class btree
 					} else { y->top->right = x; } }
 			if ( y != leaf)
 				leaf->key_value = y->key_value;
-				//
-			return y;
 		}
-/**/	void Tree_Insert(int key)
+	void Tree_Insert(int key)
 		{
 			node *ideti;
 			ideti = new node;
@@ -160,21 +156,21 @@ class btree
 		{
 			return Tree_Size(root, 0);
 		}
-/**/	void Pasikartojantys()
+	void Pasikartojantys()
 		{
 			Pasikartojantys(root);
 		}
-/**/	void PasikartojaciuIsrinkimas(){
+	void PasikartojaciuIsrinkimas(){
 			PasikartojaciuIsrinkimas(root);
 		}
-/**/	void PasikartojanciuSpausdinimas(){
+	void PasikartojanciuSpausdinimas(){
 			for(hash_map<string,int>::iterator i = map.begin(); i != map.end(); i++)
 			{
 				cout << setw(2) << i->second << " : " << i->first << endl;
 			}
 			cout<< "Pasikartojaciu pavardziu skaicius: " <<map.size() << endl;
 		}
-/**/	void IskotiPasikartojanciuPavardiu()
+	void IskotiPasikartojanciuPavardiu()
 		{
 			IskotiPasikartojanciuPavardiu(root);
 		}
@@ -198,7 +194,7 @@ class btree
 			cout<< "Pasikartojaciu pavardziu skaicius: " <<pas <<"   "<<ne<< "   " << pas_sk << endl;
 			return t;
 		}
-/**/	int height(){
+	int height(){
 			return height(root);
 		}
     private:
@@ -222,8 +218,8 @@ class btree
 					leaf->left->key_value=key;
 					leaf->left->sk = 1;
 					leaf->left->top = leaf;
-					leaf->left->left=NULL;    //Sets the left child of the child node to null
-					leaf->left->right=NULL;   //Sets the right child of the child node to null
+					leaf->left->left=NULL;
+					leaf->left->right=NULL;
 				}  
 			}
 			else if(key > leaf->key_value)
@@ -236,8 +232,8 @@ class btree
 					leaf->right->key_value=key;
 					leaf->right->top = leaf;
 					leaf->right->sk = 1;
-					leaf->right->left=NULL;  //Sets the left child of the child node to null
-					leaf->right->right=NULL; //Sets the right child of the child node to null
+					leaf->right->left=NULL;
+					leaf->right->right=NULL;
 				}
 			} else if(key == leaf->key_value){
 				leaf->sk++;
@@ -260,7 +256,7 @@ class btree
 			}
 			return leaf;
 		}
-/**/	void Inorder_Tree_Walk(node *leaf)
+	void Inorder_Tree_Walk(node *leaf)
 		{
 			if ( leaf != NULL){
 				Inorder_Tree_Walk( leaf->left );
@@ -280,7 +276,7 @@ class btree
 				leaf = leaf->right; }
 			return leaf;
 		}
-/**/	void Tree_Insert(node *leaf) 
+	void Tree_Insert(node *leaf) 
 		{
 			node *y = NULL;
 			node *x = root;
@@ -305,8 +301,6 @@ class btree
 
 			if ( leaf != NULL){
 				Show_Tree( leaf->left );
-								//if (leaf->top != NULL)
-				//	cout << "   " << leaf->top->key_value << endl;
 				if ( leaf->left != NULL)
 					cout << leaf->left->key_value;
 				cout << " <-- " << leaf->key_value << " --> ";
@@ -326,7 +320,7 @@ class btree
 			}
 			return dydis;
 		}
-/**/	void Pasikartojantys(node *leaf)
+	void Pasikartojantys(node *leaf)
 		{
 			if ( leaf != NULL){
 				Pasikartojantys( leaf->left);
@@ -335,30 +329,30 @@ class btree
 				Pasikartojantys( leaf->right);
 			}
 		}
-/**/	void IskotiPasikartojanciosPavardes(node *leaf, int key)				// T1(n)
+	void IskotiPasikartojanciosPavardes(node *leaf, int key)
 		{
-			if ( leaf == NULL ) {												// 1
+			if ( leaf == NULL ) {
 				return;
 			}
-			if ( getString(key).compare(getString(leaf->key_value)) == 0 )		// O(1)
-				leaf->sk++;														// 1
-			if ( getString(key).compare(getString(leaf->key_value )) == -1 ) {	// O(1)
-				IskotiPasikartojanciosPavardes( leaf->left, key );				// T1(n/2)
+			if ( getString(key).compare(getString(leaf->key_value)) == 0 )
+				leaf->sk++;
+			if ( getString(key).compare(getString(leaf->key_value )) == -1 ) {
+				IskotiPasikartojanciosPavardes( leaf->left, key );
 			} else { 
-				IskotiPasikartojanciosPavardes( leaf->right, key );				// T1(n/2)
+				IskotiPasikartojanciosPavardes( leaf->right, key );
 			}
 		}
-/**/	void IskotiPasikartojanciuPavardiu(node *leaf)					// T(n)
+	void IskotiPasikartojanciuPavardiu(node *leaf)
 		{
-			if ( leaf != NULL){											// 1
-				IskotiPasikartojanciosPavardes(root, leaf->key_value);	// T1(n)
-				IskotiPasikartojanciuPavardiu( leaf->left);				// T(n/2)
-				IskotiPasikartojanciuPavardiu( leaf->right);			// T(n/2)
+			if ( leaf != NULL){
+				IskotiPasikartojanciosPavardes(root, leaf->key_value);
+				IskotiPasikartojanciuPavardiu( leaf->left);
+				IskotiPasikartojanciuPavardiu( leaf->right);
 			}
 		}
-/**/	void PasikartojaciuIsrinkimas(node *leaf){
+	void PasikartojaciuIsrinkimas(node *leaf){
 			if ( leaf != NULL){
-				if (leaf->sk > 1) //cout << getString(leaf->key_value) << endl;
+				if (leaf->sk > 1)
 					map[getString(leaf->key_value)]=leaf->sk;
 				PasikartojaciuIsrinkimas( leaf->left );
 				
@@ -372,7 +366,7 @@ class btree
 				simpleSearch(leaf->right);
 			}
 		}
-/**/	int height(node *leaf){
+	int height(node *leaf){
 		   if(leaf == NULL )
 			   return 0;
 		   return 1 + max( height(leaf->left), height(leaf->right) );
@@ -392,29 +386,17 @@ int main()
 		b.Tree_Insert(i);
 	}
 	t2 = clock();
-	//b.Show_Tree();
-	//cout << "---perziura---" << endl; b.Inorder_Tree_Walk();
 	t3 = clock();
 	cout << "---Skaiciujamos pasikartojacios pavardes---" << endl; b.IskotiPasikartojanciuPavardiu();
 	t4 = clock();
-	//cout << "---Pasikartojacios pavardes isrenkamos---" << endl; b.Pasikartojantys();
-	//b.PasikartojaciuIsrinkimas();
 	t5 = clock();
-	//cout << "---Pasikartojancios pavardes spausdinamos---" << endl; b.PasikartojanciuSpausdinimas();
 	t6 = clock();
 	cout << "---simleSearch---" << endl; t7 = b.simpleSearch();
 	t8 = clock();
 
 
-	//cout << "(t2 - t1) duomenu ikelimas: " << (t2 - t1)/(double) CLOCKS_PER_SEC << endl;
-	//cout << "(t3 - t2) in order tree walk: " << (t3 - t2)/(double) CLOCKS_PER_SEC << endl;
 	cout << "(t4 - t3) uztruko: " << (t4 - t3)/(double) CLOCKS_PER_SEC << endl;
-	//cout << "(t5 - t4) uztruko: " << (t5 - t4)/(double) CLOCKS_PER_SEC << endl;
-	//cout << "(t6 - t5) uztruko: " << (t6 - t5)/(double) CLOCKS_PER_SEC << endl;
-	//cout << "(t6 - t3) uztruko: " << (t6 - t3)/(double) CLOCKS_PER_SEC << "  oldSearch" << endl;
 	cout << "(t7 - t6) simpleSearch: " << (t7 - t6)/(double) CLOCKS_PER_SEC <<endl;
-	//cout << "(t8 - t7) simpleSearch_toString: " << (t8 - t7)/(double) CLOCKS_PER_SEC <<endl;
-	//cout << "is viso: " << (t7-t1)/(double) CLOCKS_PER_SEC << endl;
 
 	cout << b.height() << endl;
 
